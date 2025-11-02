@@ -1,0 +1,87 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('skz-wallpaper.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+#logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    
+}
+
+.window {
+    border: solid black 1px;
+    width: 310px;
+    border-radius: 15px;
+    padding: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: azure;
+    box-shadow: black 4px 4px 8px;
+}
+
+h1 {
+    font-family: 'Playpen Sans Hebrew', sans-serif;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+p {
+    font-family: 'Caveat Brush', cursive;
+    margin: 0;
+}
+
+p code {
+    font-family: 'Fira Code', monospace;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.25);
+    color: #fff;
+}
+
+.navbar p {
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.125);
+    padding: 4px 12px;
+    border-radius: 16px;
+    position: absolute;
+    top: 3px;
+}
+
+#icon {
+    left: 0px;
+}
+
+#name {
+    left: 50px;
+}
+
+#date {
+    right: 100px;
+}
+
+#time {
+    right: 0px;
+}
+
+#quote {
+    right: 600px;
+}
