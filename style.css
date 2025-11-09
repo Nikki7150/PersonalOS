@@ -148,3 +148,47 @@ h1 {
   color: #fff;
   font-weight: 500
 }
+
+#desktopApps {
+    padding-top: 64px; 
+    padding-left: 16px;
+    
+    div {
+        text-align: center; 
+        padding: 16px; 
+        filter: drop-shadow(0 0 4px black); 
+        width: fit-content;
+
+        #notes-icon {
+            width: 64px; 
+            height: 64px; 
+            border-radius: 16px;
+            cursor: pointer;
+        }
+
+        p {
+            margin: 0px; 
+            color: #fff; 
+        }
+    }
+}
+
+#notes {
+    border: solid black 1px;
+    width: 310px;
+    border-radius: 15px;
+    padding: 16px;
+    padding-top: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: black 4px 4px 8px;
+    p {
+    font-family: 'Caveat Brush', cursive;
+    color: black;
+    margin: 0;
+    }
+}

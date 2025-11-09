@@ -8,6 +8,7 @@ setInterval(updateTIME, 1000);
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("welcome"));
+dragElement(document.getElementById("notes"));
 
 // Step 1: Define a function called `dragElement` that makes an HTML element draggable.
 function dragElement(element) {
@@ -67,12 +68,22 @@ var welcomescreen = document.getElementById("welcome");
 var welcomeclose = document.getElementById("welcomeclose");
 var welcomeopen = document.getElementById("name");
 
+var notesscreen = document.getElementById("notes");
+var notesclose = document.getElementById("notes-close");
+
+var topBar = document.getElementById("top");
+
+var biggestZIndex = 1;
+
 function closeWindow(element) {
     element.style.display = "none";
 }
 
 function openWindow(element) {
-    element.style.display = "block";
+  element.style.display = "flex";
+  biggestZIndex++;
+  element.style.zIndex = biggestZIndex;
+  if (topBar) topBar.style.zIndex = biggestZIndex + 1;
 }
 
 welcomeclose.addEventListener("click", function() {
@@ -82,3 +93,77 @@ welcomeclose.addEventListener("click", function() {
 welcomeopen.addEventListener("click", function() {
   openWindow(welcomescreen);
 });
+
+notesclose.addEventListener("click", function() {
+  closeWindow(notesscreen);
+});
+
+var selectedIcon = undefined;
+
+function selectIcon(element) {
+    element.classList.add("selected");
+    selectedIcon = element;
+}
+
+function deselectIcon(element) {
+    element.classList.remove("selected");
+    selectedIcon = undefined;
+}
+
+function handleIconTap(element) {
+  var isVisible = window.getComputedStyle(notesscreen).display !== 'none';
+  if (isVisible) {
+    closeWindow(notesscreen);
+    if (element.classList.contains('selected')) deselectIcon(element);
+  } else {
+    selectIcon(element);
+    openWindow(notesscreen);
+  }
+}
+
+var notesAppIcon = document.getElementById("notes-app");
+if (notesAppIcon) {
+  notesAppIcon.addEventListener("click", function() {
+    handleIconTap(notesAppIcon);
+  });
+}
+
+function addWindowTapHandling(element) {
+    element.addEventListener("mousedown", () =>
+        handleWindowTap(element)
+    );
+}
+
+function handleWindowTap(element) {
+      biggestZIndex++;
+  element.style.zIndex = biggestZIndex;
+  if (topBar) topBar.style.zIndex = biggestZIndex + 1;
+  if (selectedIcon) deselectIcon(selectedIcon);
+}
+
+if (typeof addWindowTapHandling === 'function') {
+  document.querySelectorAll('.window').forEach(function(el) {
+    addWindowTapHandling(el);
+  });
+}
+
+function initializeIcon(name) {
+    var icon = document.querySelector("#" + name + "Icon");
+    var screen = document.querySelector("#" + name);
+    icon.addEventListener("click", function() {
+        handleIconTap(icon, screen);
+    });
+}
+
+function initializeWindow(elementName) {
+    var screen = document.querySelector("#" + elementName);
+    addWindowTapHandling(screen);
+    makeCLosable(elementName);
+    dragElement(screen);
+    if(elementName != "welcome") {
+        initializeIcon(elementName);
+    }
+}
+
+initializeWindow("welcome");
+initializeWindow("notes");
